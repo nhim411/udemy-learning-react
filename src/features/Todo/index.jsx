@@ -8,6 +8,7 @@ function TodoFeature(props) {
 		{ id: 3, title: 'do homework', status: 'new' },
 	];
 	const [todoList, setTodoList] = useState(initTodoList);
+	const [FilterStatus, setFilterStatus] = useState('all');
 	const handleTodoClick = (todo, index) => {
 		const newTodoList = [...todoList];
 		newTodoList[index] = {
@@ -17,11 +18,32 @@ function TodoFeature(props) {
 		setTodoList(newTodoList);
 	};
 
+	const handleShowAllClick = () => {
+		setFilterStatus('all');
+	};
+	const handleShowCompletedClick = () => {
+		setFilterStatus('completed');
+	};
+	const handleShownNewClick = () => {
+		setFilterStatus('new');
+	};
+
+	const renderedTodoList = todoList.filter((todo) => FilterStatus === 'all' || FilterStatus === todo.status);
+
 	return (
-		<>
+		<div className='todo'>
 			<h3>Todo List</h3>
-			<TodoList todoList={todoList} onTodoClick={handleTodoClick} />
-		</>
+			<TodoList todoList={renderedTodoList} onTodoClick={handleTodoClick} />
+			<button onClick={handleShowAllClick} disabled={FilterStatus === 'all'}>
+				Show All
+			</button>
+			<button onClick={handleShowCompletedClick} disabled={FilterStatus === 'completed'}>
+				Show Completed
+			</button>
+			<button onClick={handleShownNewClick} disabled={FilterStatus === 'new'}>
+				Show New
+			</button>
+		</div>
 	);
 }
 
