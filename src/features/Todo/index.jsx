@@ -32,7 +32,7 @@ function TodoFeature(props) {
 
 	return (
 		<div className='todo'>
-			<h3>Todo List</h3>
+			<h2>Todo List</h2>
 			<TodoList todoList={renderedTodoList} onTodoClick={handleTodoClick} />
 			<button onClick={handleShowAllClick} disabled={FilterStatus === 'all'}>
 				Show All
